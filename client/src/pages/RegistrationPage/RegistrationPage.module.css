@@ -1,0 +1,25 @@
+.registrationPage {
+  display: flex;
+  height: 100vh;
+}
+
+.leftSide,
+.rightSide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.leftSide {
+  flex: 1;
+  padding: 20px;
+  flex-direction: column;
+  position: relative;
+}
+
+.rightSide {
+  flex: 1;
+  background-image: url("../../static/depositphotos_89074170-stock-photo-abstract-background-of-blue-gray.jpg");
+  overflow: hidden;
+}

@@ -1,0 +1,22 @@
+.iconWrapper {
+  position: absolute;
+}
+
+.icon {
+  font-size: 18px;
+  color: #6c757d;
+}
+
+.emailIcon, .passwordIcon {
+  right: 5%;
+  top: 5%;
+}
+
+.passwordIcon {
+
+  cursor: pointer; /* Сделаем иконку кликабельной */
+}
+
+.btn {
+	background-color: red;
+}

@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Shrift';
+  src: url('../../fonts/DreiFraktur.ttf') format('truetype');
+}
+
+.logo {
+	font-family: 'Shrift', sans-serif;
+	font-size: 50px;
+	position: absolute;
+	top: 70px;
+	left: 100px
+}
