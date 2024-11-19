@@ -1,0 +1,37 @@
+.user_list {
+  margin: 0 15px 0 15px;
+}
+
+.table_header {
+  display: grid;
+  grid-template-columns: 0.1fr 1.5fr 1.5fr 1fr;
+  padding: 0 10px 0 10px;
+  font-weight: bold;
+  font-size: large;
+  border-bottom: 2px solid rgb(211, 220, 226);
+}
+
+.header_item {
+  text-align: left;
+  padding: 10px;
+}
+
+.user_item {
+  display: grid;
+  grid-template-columns: 0.1fr 1.5fr 1.5fr 1fr;
+  padding: 10px;
+  border-bottom: 2px solid rgb(211, 220, 226);
+}
+
+.user_field {
+  text-align: left;
+  padding: 10px;
+}
+
+.user_field span:hover {
+  cursor: pointer;
+}
+
+.table_checkbox:hover {
+  cursor: pointer;
+}

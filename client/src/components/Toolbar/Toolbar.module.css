@@ -1,0 +1,41 @@
+.toolBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(243, 246, 248);
+  margin: 15px 15px 0 15px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.toolBar_buttons {
+  display: flex;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+.icon {
+  padding: 3px;
+  cursor: pointer;
+}
+
+.customBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-width: 2px;
+  height: 2.5rem;
+}
+
+.toolBar_input {
+	border-radius: 5px;
+	padding-left: 10px;
+	border: 2px solid rgb(211, 220, 226);
+	height: 2.5rem;
+	width: 20%;
+}
+
+.toolBar_input:focus {
+	border-color: #0d6efd;
+	outline: none;
+}

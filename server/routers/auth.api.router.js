@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const { User } = require("../db/models");
 const generateToken = require("../utils/generateToken");
 const cookiesConfig = require("../configs/cookiesConfig");
+const validator = require("validator");
 
 router
   .post("/registration", async (req, res) => {
@@ -11,6 +12,10 @@ router
 
     if (!(first_name && last_name && email && password)) {
       return res.status(400).json({ message: "All fields are required" });
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
     }
 
     const existingUser = await User.findOne({ where: { email } });
@@ -31,15 +36,15 @@ router
       },
     });
 
+    await user.update({ last_seen_date: new Date() });
+
     const plainUser = user.get();
     delete plainUser.password;
 
     if (!created) res.status(403).json({ message: "User already exists" });
 
-    //! Генерируем access и refresh
     const { accessToken, refreshToken } = generateToken({ user: plainUser });
 
-    //! Устанавливаем cookie с access токеном
     res
       .cookie("refreshToken", refreshToken, cookiesConfig.refresh)
       .json({ user: plainUser, accessToken });
@@ -47,8 +52,6 @@ router
 
   .post("/login", async (req, res) => {
     const { email, password } = req.body;
-    console.log(email, password);
-    
 
     if (!(email && password)) {
       return res.status(400).json({ message: "All fields are required" });
@@ -65,6 +68,8 @@ router
       if (!correctPass) {
         return res.status(401).json({ message: "Incorrect user or password" });
       }
+
+      await user.update({ last_seen_date: new Date() });
 
       const plainUser = user.get();
       delete plainUser.password;

@@ -1,19 +1,24 @@
 import AuthForm from "../../components/AuthForm/AuthForm";
+import styles from "../RegistrationPage/RegistrationPage.module.css";
 import Logo from "../../components/Logo/Logo";
-import styles from "./RegistrationPage.module.css";
 import Clue from "../../components/Clue/Clue";
 
-function RegistrationPage({ setUser }) {
+function RegistrationPage({ type, setUser }) {
   return (
     <div className={styles.registrationPage}>
       <div className={styles.leftSide}>
         <Logo />
-        <AuthForm
-          title="Зарегистрироваться"
-          type="registration"
-          setUser={setUser}
-        />
-        <Clue type="login" />
+        {type === "registration" ? (
+          <>
+            <AuthForm type="registration" setUser={setUser} />
+            <Clue type="login" />
+          </>
+        ) : (
+          <>
+            <AuthForm type="login" setUser={setUser} />
+            <Clue type="registration" />
+          </>
+        )}
       </div>
       <div className={styles.rightSide}></div>
     </div>

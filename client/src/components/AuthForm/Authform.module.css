@@ -19,8 +19,11 @@
 
 .errorAlert {
   position: fixed;
-  top: 50%;
-  left: 20%;
+  top: 2%;
+  left: 82%;
   z-index: 1050;
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
 }
 

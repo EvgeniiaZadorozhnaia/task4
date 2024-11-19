@@ -19,9 +19,7 @@ app.use(express.json({ extended: true }));
 app.use(cors(corsConfig));
 app.use(removeHeader);
 app.use("/api/v1", apiRouter);
-// app.use("*", (req, res) => {
-//   res.redirect("/");
-// });
+
 app.listen(PORT, () => {
   console.log(`Server started at ${PORT} port`);
 });
