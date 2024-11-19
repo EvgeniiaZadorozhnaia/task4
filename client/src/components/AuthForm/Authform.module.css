@@ -7,16 +7,20 @@
   color: #6c757d;
 }
 
-.emailIcon, .passwordIcon {
+.emailIcon,
+.passwordIcon {
   right: 5%;
   top: 5%;
 }
 
 .passwordIcon {
-
-  cursor: pointer; /* Сделаем иконку кликабельной */
+  cursor: pointer;
 }
 
-.btn {
-	background-color: red;
+.errorAlert {
+  position: fixed;
+  top: 50%;
+  left: 20%;
+  z-index: 1050;
 }
+

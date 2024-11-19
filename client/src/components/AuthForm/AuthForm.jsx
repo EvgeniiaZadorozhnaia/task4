@@ -4,8 +4,9 @@ const { VITE_API, VITE_BASE_URL } = import.meta.env;
 import { useNavigate } from "react-router-dom";
 import Invitation from "../Invitation/Invitation";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa"; // Импорт иконок
+import { FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
 import styles from "./AuthForm.module.css";
+import "animate.css";
 
 function AuthForm({ title, type, setUser }) {
   const [inputs, setInputs] = useState({
@@ -14,7 +15,11 @@ function AuthForm({ title, type, setUser }) {
     email: "",
     password: "",
   });
-  const [passwordVisible, setPasswordVisible] = useState(false); // Состояние для видимости пароля
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   const changeHandler = (e) => {
@@ -22,7 +27,15 @@ function AuthForm({ title, type, setUser }) {
   };
 
   const togglePasswordVisibility = () => {
-    setPasswordVisible((prev) => !prev); // Переключение видимости пароля
+    setPasswordVisible((prev) => !prev);
+  };
+
+  const handleRememberMeChange = (e) => {
+    setRememberMe(e.target.checked);
+  };
+
+  const closeError = () => {
+    setShowError(false);
   };
 
   const submitHandler = async (e) => {
@@ -36,14 +49,38 @@ function AuthForm({ title, type, setUser }) {
 
       setUser(res.data.user);
       setAccessToken(res.data.accessToken);
+
+      if (rememberMe) {
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        localStorage.setItem("accessToken", res.data.accessToken);
+      } else {
+        localStorage.removeItem("user");
+        localStorage.removeItem("accessToken");
+      }
       navigate(`${VITE_BASE_URL}${VITE_API}/users`);
     } catch (error) {
+      setError(error?.response?.data?.message);
+      setShowError(true);
       console.log(error);
     }
   };
 
   return (
     <form onSubmit={submitHandler} className="needs-validation" noValidate>
+      {showError && error && (
+        <div
+          className={`alert alert-danger animate__animated animate__shakeX ${styles.errorAlert}`}
+          role="alert"
+        >
+          {error}
+          <button
+            type="button"
+            className="btn-close"
+            aria-label="Close"
+            onClick={closeError}
+          ></button>
+        </div>
+      )}
       {type === "registration" && (
         <>
           <Invitation type="registration" />
@@ -115,6 +152,19 @@ function AuthForm({ title, type, setUser }) {
             </div>
           </div>
 
+          <div className="mb-3 form-check">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              id="rememberMe"
+              checked={rememberMe}
+              onChange={handleRememberMeChange}
+            />
+            <label className="form-check-label" htmlFor="rememberMe">
+              Remember me
+            </label>
+          </div>
+
           <button type="submit" className="btn btn-secondary w-100">
             Sign up
           </button>
@@ -163,6 +213,19 @@ function AuthForm({ title, type, setUser }) {
                 />
               )}
             </div>
+          </div>
+          
+          <div className="mb-3 form-check">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              id="rememberMe"
+              checked={rememberMe}
+              onChange={handleRememberMeChange}
+            />
+            <label className="form-check-label" htmlFor="rememberMe">
+              Remember me
+            </label>
           </div>
 
           <button type="submit" className="btn btn-secondary w-100">

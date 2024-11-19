@@ -1,13 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom"; // Импортируем Link из react-router-dom
+import styles from './Clue.module.css'
 
 function Clue({ type }) {
   return (
-    <div>
+    <div className={styles.clue}>
       {type === "registration" ? (
-        <Link to="/registration">Don't have an account? Sign up</Link>
+		<p>Don't have an account?{' '}
+		<Link to="/registration">Sign up</Link></p>
       ) : (
-        <Link to="/login">Already have an account? Sign in</Link>
+        <p>
+          Already have an account?{" "}
+          <Link to="/login">Sign in</Link>
+        </p>
       )}
     </div>
   );
