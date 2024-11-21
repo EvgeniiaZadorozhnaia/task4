@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import Invitation from "../Invitation/Invitation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
-import styles from "./AuthForm.module.css";
+import styles from "../AuthForm/AuthForm.module.css";
 import "animate.css";
 
-function AuthForm({ type, setUser, user }) {
+function AuthForm({ type, setUser }) {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     first_name: "",

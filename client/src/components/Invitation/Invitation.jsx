@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Invitation.module.css";
 
 function Invitation({ type }) {

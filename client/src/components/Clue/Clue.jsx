@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom"; // Импортируем Link из react-router-dom
 import styles from './Clue.module.css'
 

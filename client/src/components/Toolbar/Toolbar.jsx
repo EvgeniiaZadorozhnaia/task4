@@ -1,5 +1,4 @@
 import styles from "./Toolbar.module.css";
-import { useState } from "react";
 
 function Toolbar({
   showNotice,
