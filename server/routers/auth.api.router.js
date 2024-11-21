@@ -11,7 +11,7 @@ router
     const status = "active";
 
     if (!(first_name && last_name && email && password)) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({ message: "All fields must be filled in" });
     }
 
     if (!validator.isEmail(email)) {
@@ -54,7 +54,7 @@ router
     const { email, password } = req.body;
 
     if (!(email && password)) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({ message: "All fields must be filled in" });
     }
 
     try {
@@ -62,6 +62,12 @@ router
 
       if (!user) {
         return res.status(401).json({ message: "Incorrect user or password" });
+      }
+
+      if (user.status === "block") {
+        return res
+          .status(401)
+          .json({ message: "Your account has been blocked" });
       }
 
       const correctPass = await bcrypt.compare(password, user.password);

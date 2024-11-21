@@ -3,7 +3,7 @@ const { VITE_API, VITE_BASE_URL } = import.meta.env;
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function AuthCheck({ user, setUser }) {
+function AuthCheck({ setUser }) {
   const navigate = useNavigate();
 
   useEffect(() => {

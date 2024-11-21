@@ -11,6 +11,10 @@
   border-bottom: 2px solid rgb(211, 220, 226);
 }
 
+.select_all_checkbox {
+  display: none;
+}
+
 .header_item {
   text-align: left;
   padding: 10px;
@@ -19,8 +23,13 @@
 .user_item {
   display: grid;
   grid-template-columns: 0.1fr 1.5fr 1.5fr 1fr;
-  padding: 10px;
+  padding: 0 10px 0 10px;
   border-bottom: 2px solid rgb(211, 220, 226);
+}
+
+.user_info {
+  display: flex;
+  align-items: center;
 }
 
 .user_field {
@@ -35,3 +44,45 @@
 .table_checkbox:hover {
   cursor: pointer;
 }
+
+.user_block {
+  color: rgb(83, 78, 78);
+  text-decoration: line-through;
+}
+
+@media (max-width: 480px) {
+  .table_header {
+    display: none;
+  }
+
+  .header_item {
+    position: relative;
+  }
+
+  .user_item {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+
+  }
+
+  .user_field {
+    padding: 8px;
+    font-size: small;
+    
+  }
+
+  .user_field:nth-child(1) {
+    width: 20px;
+    position: absolute;
+    right: 4%;
+  }
+
+  .select_all_checkbox {
+    display: flex;
+    gap: 10px;
+    margin: 18px 0 0 18px;
+    justify-content: flex-end;
+  }
+}
+

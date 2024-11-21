@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
-import Page404 from "./pages/Page404";
 import UsersPage from "./pages/UsersPage/UsersPage";
 import AuthCheck from "./components/AuthCheck/AuthCheck";
 
@@ -12,23 +11,28 @@ function App() {
     [
       {
         path: "/",
-        element: <AuthCheck user={user} setUser={setUser} />,
+        element: <AuthCheck setUser={setUser} />,
       },
       {
         path: "/registration",
-        element: <RegistrationPage type="registration" setUser={setUser} />,
+        element: (
+          <RegistrationPage type="registration" user={user} setUser={setUser} />
+        ),
       },
       {
         path: "/login",
-        element: <RegistrationPage type='login' setUser={setUser} />,
-      },
-      {
-        path: "/*",
-        element: <Page404 />,
+        element: (
+          <RegistrationPage type="login" user={user} setUser={setUser} />
+        ),
       },
       {
         path: "/users",
-        element: <UsersPage />,
+        element:
+          user && user.status === "active" ? (
+            <UsersPage/>
+          ) : (
+            <Link to="/login" />
+          ),
       },
     ],
     {

@@ -28,14 +28,37 @@
 }
 
 .toolBar_input {
-	border-radius: 5px;
-	padding-left: 10px;
-	border: 2px solid rgb(211, 220, 226);
-	height: 2.5rem;
-	width: 20%;
+  border-radius: 5px;
+  padding-left: 10px;
+  border: 2px solid rgb(211, 220, 226);
+  height: 2.5rem;
+  width: 20%;
 }
 
 .toolBar_input:focus {
-	border-color: #0d6efd;
-	outline: none;
+  border-color: #0d6efd;
+  outline: none;
+}
+
+.noticeAlert {
+  position: fixed;
+  top: 2%;
+  right: 1%;
+  z-index: 1050;
+  display: flex;
+  gap: 15px;
+}
+
+@media (max-width: 480px) {
+  .toolBar_buttons {
+    margin-left: 0;
+  }
+
+  .toolBar_buttons button:nth-child(1) {
+    width: 40%;
+  }
+
+  .toolBar_input {
+    width: 35%;
+  }
 }

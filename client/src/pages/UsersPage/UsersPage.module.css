@@ -1,0 +1,6 @@
+.btn_logOut {
+  position: fixed;
+  top: 90%;
+  right: 3%;
+  z-index: 1050;
+}

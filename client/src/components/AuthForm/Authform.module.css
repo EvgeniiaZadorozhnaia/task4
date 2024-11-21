@@ -20,10 +20,8 @@
 .errorAlert {
   position: fixed;
   top: 2%;
-  left: 82%;
+  right: 1%;
   z-index: 1050;
-  width: 250px;
   display: flex;
-  justify-content: space-between;
+  gap: 15px;
 }
-

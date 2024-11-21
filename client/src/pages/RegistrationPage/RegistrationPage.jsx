@@ -3,19 +3,19 @@ import styles from "../RegistrationPage/RegistrationPage.module.css";
 import Logo from "../../components/Logo/Logo";
 import Clue from "../../components/Clue/Clue";
 
-function RegistrationPage({ type, setUser }) {
+function RegistrationPage({ type, setUser, user }) {
   return (
     <div className={styles.registrationPage}>
       <div className={styles.leftSide}>
         <Logo />
         {type === "registration" ? (
           <>
-            <AuthForm type="registration" setUser={setUser} />
+            <AuthForm type="registration" user={user} setUser={setUser} />
             <Clue type="login" />
           </>
         ) : (
           <>
-            <AuthForm type="login" setUser={setUser} />
+            <AuthForm type="login" user={user} setUser={setUser} />
             <Clue type="registration" />
           </>
         )}

@@ -8,7 +8,7 @@ import { FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
 import styles from "./AuthForm.module.css";
 import "animate.css";
 
-function AuthForm({ type, setUser }) {
+function AuthForm({ type, setUser, user }) {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     first_name: "",
@@ -42,7 +42,7 @@ function AuthForm({ type, setUser }) {
     if (showError) {
       const timer = setTimeout(() => {
         setShowError(false);
-      }, 1500);
+      }, 2500);
 
       return () => clearTimeout(timer);
     }
@@ -55,8 +55,6 @@ function AuthForm({ type, setUser }) {
         `${VITE_BASE_URL}${VITE_API}/auth/${type}`,
         inputs
       );
-      console.log(res);
-
       setUser(res.data.user);
       setAccessToken(res.data.accessToken);
 
@@ -64,8 +62,7 @@ function AuthForm({ type, setUser }) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("accessToken", res.data.accessToken);
       } else {
-        localStorage.removeItem("user");
-        localStorage.removeItem("accessToken");
+        localStorage.clear();
       }
       navigate(`/users`);
     } catch (error) {
@@ -79,7 +76,7 @@ function AuthForm({ type, setUser }) {
     <>
       {showError && error && (
         <div
-          className={`alert alert-danger animate__animated animate__headShake ${styles.errorAlert}`}
+          className={`alert alert-danger animate__animated animate__bounceInRight ${styles.errorAlert}`}
           role="alert"
         >
           {error}

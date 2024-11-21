@@ -1,26 +1,7 @@
-import { useEffect, useState } from "react";
-import axiosInstance from "../../axiosInstance";
-const { VITE_API, VITE_BASE_URL } = import.meta.env;
 import styles from "./Table.module.css";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
-function Table() {
-  const [users, setUsers] = useState([]);
-  const [selectedUsers, setSelectedUsers] = useState(new Set());
-
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const res = await axiosInstance(`${VITE_BASE_URL}${VITE_API}/users`);
-        setUsers(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getUsers();
-  }, []);
-
+function Table({ users, selectedUsers, handleSelectAll, handleSelectUser }) {
   const timeAgo = (date) => {
     const now = new Date();
     const delta = now - new Date(date);
@@ -46,27 +27,6 @@ function Table() {
     }
   };
 
-  const handleSelectAll = () => {
-    if (selectedUsers.size === users.length) {
-      setSelectedUsers(new Set());
-    } else {
-      const allUserIds = users.map((user) => user.id);
-      setSelectedUsers(new Set(allUserIds));
-    }
-  };
-
-  const handleSelectUser = (id) => {
-    setSelectedUsers((prevSelected) => {
-      const newSelected = new Set(prevSelected);
-      if (newSelected.has(id)) {
-        newSelected.delete(id);
-      } else {
-        newSelected.add(id);
-      }
-      return newSelected;
-    });
-  };
-
   const formatDate = (date) => {
     return new Date(date).toLocaleString("en-En", {
       year: "numeric",
@@ -80,6 +40,16 @@ function Table() {
 
   return (
     <div className={styles.user_list}>
+      <div className={styles.select_all_checkbox}>
+        <span>Select All</span>
+        <input
+          className={styles.table_checkbox}
+          type="checkbox"
+          checked={selectedUsers.size === users.length}
+          onChange={handleSelectAll}
+        />
+      </div>
+
       <div className={styles.table_header}>
         <div className={styles.header_item}>
           <input
@@ -93,6 +63,7 @@ function Table() {
         <div className={styles.header_item}>Email</div>
         <div className={styles.header_item}>Last Seen</div>
       </div>
+
       {users?.map((user) => (
         <div className={styles.user_item} key={user.id}>
           <div className={styles.user_field}>
@@ -103,11 +74,25 @@ function Table() {
               onChange={() => handleSelectUser(user.id)}
             />
           </div>
-          <div className={styles.user_field}>
+          <div
+            className={`${styles.user_field} ${
+              user.status === "block" ? styles.user_block : ""
+            }`}
+          >
             {user.last_name}, {user.first_name}
           </div>
-          <div className={styles.user_field}>{user.email}</div>
-          <div className={styles.user_field}>
+          <div
+            className={`${styles.user_field} ${
+              user.status === "block" ? styles.user_block : ""
+            }`}
+          >
+            {user.email}
+          </div>
+          <div
+            className={`${styles.user_field} ${
+              user.status === "block" ? styles.user_block : ""
+            }`}
+          >
             <OverlayTrigger
               placement="top"
               overlay={<Tooltip>{formatDate(user.last_seen_date)}</Tooltip>}
