@@ -1,0 +1,8 @@
+DATABASE=postgres://postgres:1@db:5432/docker
+DBNAME=docker
+DBHOST=db
+DBUSER=postgres
+DBPASSWORD=1
+DBPORT=5432
+PGPATH=/home/user/db
+

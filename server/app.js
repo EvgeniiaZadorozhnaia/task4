@@ -7,17 +7,22 @@ const removeHeader = require("./middlewares/removeHeader");
 const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT_PROD;
+const { PORT } = process.env;
 
-const corsConfig = {
-  origin: ["http://localhost:5173"],
-  credentials: true,
-};
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "http://81.163.22.188",
+      "http://whale2024.crabdance.com",
+    ],
+    credentials: true,
+  })
+);
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
-app.use(cors(corsConfig));
 app.use(removeHeader);
 const pathToDist = path.join(__dirname, "dist");
 app.use(express.static(path.join(pathToDist)));
