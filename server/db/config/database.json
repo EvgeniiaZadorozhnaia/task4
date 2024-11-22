@@ -11,7 +11,7 @@
     "dialect": "mysql"
   },
   "production": {
-    "use_env_variable": "DB",
+    "use_env_variable": "DB_PROD",
     "dialect": "postgres"
   }
 }

@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "db:reset": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
-    "dev": "nodemon app.js --ext js --ignore sessions"
+    "dev": "nodemon app.js --ext js --ignore sessions",
+    "prod:create": "npx sequelize db:create --env production",
+    "prod:migrate": "npx sequelize db:migrate --env production"
   },
   "keywords": [],
   "author": "",
