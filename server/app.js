@@ -7,13 +7,13 @@ const removeHeader = require("./middlewares/removeHeader");
 const path = require("path");
 
 const app = express();
-const { PORT } = process.env;
+const PORT = 3000;
 
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "http://81.163.22.188",
+      "http://localhost:3000",
       "http://whale2024.crabdance.com",
     ],
     credentials: true,
@@ -28,7 +28,7 @@ const pathToDist = path.join(__dirname, "dist");
 app.use(express.static(path.join(pathToDist)));
 app.use("/api/v1", apiRouter);
 
-app.use("*", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(pathToDist + "/index.html", (err) => {
     if (err) {
       console.log("Error sending file", err);

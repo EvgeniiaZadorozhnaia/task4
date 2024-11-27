@@ -5,4 +5,3 @@ DBUSER=postgres
 DBPASSWORD=1
 DBPORT=5432
 PGPATH=/home/user/db
-

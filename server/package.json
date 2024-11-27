@@ -5,11 +5,8 @@
   "scripts": {
     "db:reset": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
     "dev": "nodemon app.js --ext js --ignore sessions",
-    "prod:create": "npx sequelize db:create --env production",
-    "prod:migrate": "npx sequelize db:migrate --env production",
-    "prod:remigrate": "npx sequelize db:migrate:undo:all --env production",
-    "prod": "node app.js",
-    "start": "node --env-file=.env app.js"
+    "db:setup": "npx sequelize db:create --env production && npx sequelize db:migrate --env production",
+    "start": "node app.js --env production"
   },
   "keywords": [],
   "author": "",
